@@ -8,7 +8,6 @@ import (
 	"os"
 	"regexp"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/chromedp/chromedp"
@@ -16,14 +15,10 @@ import (
 )
 
 type UDCNode struct {
+	ID       string     `yaml:"id"`
 	Code     string     `yaml:"code"`
 	Title    string     `yaml:"title"`
 	Children []*UDCNode `yaml:"children,omitempty"`
-}
-
-type scraperState struct {
-	sync.Mutex
-	visited map[string]bool
 }
 
 // Configurable parameters
@@ -84,6 +79,10 @@ func walkTree(ctx context.Context, parent *UDCNode, state *PersistentState, dept
 			udcNode := &UDCNode{
 				Code:  node.Code,
 				Title: node.Title,
+				ID:    node.ID,
+			}
+			if nodeMap[node.Code] == nil {
+				udcNode.Children = []*UDCNode{}
 			}
 			parent.Children = append(parent.Children, udcNode)
 		}
