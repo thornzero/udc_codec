@@ -1,0 +1,44 @@
+- code: +
+  title: Coordination. Addition (plus sign). Table 1a
+- code: /
+  title: Consecutive extension (oblique stroke sign). Table 1a
+- code: ':'
+  title: Simple relation (colon sign). Table 1b
+- code: '::'
+  title: Order-fixing (double colon sign). Table 1b
+- code: '[]'
+  title: Subgrouping (square brackets). Table 1b
+- code: '*'
+  title: Introduces non-UDC notation (asterisk). Table 1h
+- code: A/Z
+  title: Direct alphabetical specification. Table 1h
+- code: =...
+  title: Common auxiliaries of language. Table 1c
+- code: (0...)
+  title: Common auxiliaries of form. Table 1d
+- code: (1/9)
+  title: Common auxiliaries of place. Table 1e
+- code: (=...)
+  title: Common auxiliaries of human ancestry, ethnic grouping and nationality. Table 1f
+- code: '"..."'
+  title: Common auxiliaries of time. Table 1g
+- code: -0...
+  title: 'Common auxiliaries of general characteristics: Properties, Materials, Relations/Processes and Persons. Table 1k.'
+- code: "0"
+  title: SCIENCE AND KNOWLEDGE. ORGANIZATION. COMPUTER SCIENCE. INFORMATION. DOCUMENTATION. LIBRARIANSHIP. INSTITUTIONS. PUBLICATIONS
+- code: "1"
+  title: PHILOSOPHY. PSYCHOLOGY
+- code: "2"
+  title: RELIGION. THEOLOGY
+- code: "3"
+  title: SOCIAL SCIENCES
+- code: "5"
+  title: MATHEMATICS. NATURAL SCIENCES
+- code: "6"
+  title: APPLIED SCIENCES. MEDICINE. TECHNOLOGY
+- code: "7"
+  title: THE ARTS. RECREATION. ENTERTAINMENT. SPORT
+- code: "8"
+  title: LANGUAGE. LINGUISTICS. LITERATURE
+- code: "9"
+  title: GEOGRAPHY. BIOGRAPHY. HISTORY
