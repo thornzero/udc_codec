@@ -9,5 +9,5 @@ func registerRoutes(app *fiber.App) {
 	app.Get("/api/projects", listProjects)
 	app.Get("/projects", projectsPage)
 	app.Get("/projects/:project", projectDetailPage)
-    app.Get("/export/:project", exportProjectPage)
+	app.Get("/export/:project", exportProjectPage)
 }

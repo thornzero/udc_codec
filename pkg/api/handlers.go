@@ -4,21 +4,21 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v2"
 
 	"github.com/thornzero/udc_codec/pkg/db"
 	"github.com/thornzero/udc_codec/pkg/pipeline"
 )
 
-func indexPage(c fiber.Ctx) error {
+func indexPage(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{})
 }
 
-func uploadPage(c fiber.Ctx) error {
+func uploadPage(c *fiber.Ctx) error {
 	return c.Render("upload", fiber.Map{})
 }
 
-func handleUpload(c fiber.Ctx) error {
+func handleUpload(c *fiber.Ctx) error {
 	file, err := c.FormFile("bomfile")
 	if err != nil {
 		return c.Status(400).SendString("File upload error")
@@ -36,23 +36,23 @@ func handleUpload(c fiber.Ctx) error {
 		return c.Status(500).SendString(fmt.Sprintf("Pipeline failed: %v", err))
 	}
 
-	c.Redirect()
+	c.Redirect("/")
 	return nil
 }
 
 // Health Check
-func healthCheck(c fiber.Ctx) error {
+func healthCheck(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"status": "ok"})
 }
 
 // Project Listing (stub)
-func listProjects(c fiber.Ctx) error {
+func listProjects(c *fiber.Ctx) error {
 	// Placeholder for multi-project support
 	return c.JSON([]string{"Project A", "Project B"})
 }
 
 // Upload BOM (main entry point for pipeline)
-func uploadBOM(c fiber.Ctx) error {
+func uploadBOM(c *fiber.Ctx) error {
 	file, err := c.FormFile("bomfile")
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Missing BOM file")
@@ -67,7 +67,7 @@ func uploadBOM(c fiber.Ctx) error {
 }
 
 // Individual Tag Lookup (placeholder)
-func getTag(c fiber.Ctx) error {
+func getTag(c *fiber.Ctx) error {
 	tag := c.Params("tag")
 	// Hook into DB or in-memory pipeline state
 	return c.JSON(fiber.Map{
@@ -76,7 +76,7 @@ func getTag(c fiber.Ctx) error {
 	})
 }
 
-func projectsPage(c fiber.Ctx) error {
+func projectsPage(c *fiber.Ctx) error {
 	store, err := db.OpenDB("tags.db")
 	if err != nil {
 		return c.Status(500).SendString("DB error")
@@ -95,7 +95,7 @@ func projectsPage(c fiber.Ctx) error {
 	})
 }
 
-func projectDetailPage(c fiber.Ctx) error {
+func projectDetailPage(c *fiber.Ctx) error {
 	project := c.Params("project")
 	tagFile := fmt.Sprintf("data/%s_taglist.yaml", project)
 
@@ -110,7 +110,7 @@ func projectDetailPage(c fiber.Ctx) error {
 	})
 }
 
-func exportProjectPage(c fiber.Ctx) error {
+func exportProjectPage(c *fiber.Ctx) error {
 	project := c.Params("project")
 	tagFile := fmt.Sprintf("data/%s_taglist.yaml", project)
 

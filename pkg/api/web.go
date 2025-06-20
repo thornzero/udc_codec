@@ -4,9 +4,13 @@ import (
 	"log"
 	"os"
 
-	"github.com/gofiber/fiber/v3"
-	"github.com/gofiber/fiber/v3/middleware/static"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html/v2"
 )
+
+func tagsPage(c *fiber.Ctx) error {
+	return c.Render("tags", fiber.Map{})
+}
 
 func StartWebPortal() {
 	engine := html.New("./frontend/templates", ".html")
@@ -15,7 +19,7 @@ func StartWebPortal() {
 		Views: engine,
 	})
 
-	app.Get("/static", static.New("./frontend/static"))
+	app.Static("/static", "./frontend/static")
 
 	app.Get("/", indexPage)
 	app.Get("/upload", uploadPage)
