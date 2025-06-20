@@ -1,0 +1,12 @@
+{{ define "content" }}
+<h2>Projects</h2>
+<table>
+<tr><th>Project</th><th>Status</th></tr>
+{{ range .Projects }}
+<tr>
+  <td>{{ .ProjectName }}</td>
+  <td>{{ if .Validated }}✅ Validated{{ else }}❌ Invalid{{ end }}</td>
+</tr>
+{{ end }}
+</table>
+{{ end }}

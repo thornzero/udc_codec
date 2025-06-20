@@ -16,7 +16,7 @@ func main() {
 		Use:   "scrape",
 		Short: "Production-grade full UDC recursive scrape",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := udc.ScrapeFullHierarchyChromedpProduction("data/udc_full.yaml")
+			err := udc.ScrapeFullHierarchy("data/udc_full.yaml")
 			if err != nil {
 				panic(err)
 			}

@@ -11,8 +11,14 @@ build-cli:
 build-server:
 	go build -o bin/server ./cmd/server
 
+build-Autopipeline:
+	go build -o bin/Autopipeline ./cmd/Autopipeline
+
+build-Webserver:
+	go build -o bin/Webserver ./cmd/Webserver
+
 # Build both
-build: build-cli build-server
+build: build-cli build-server build-Autopipeline build-Webserver
 
 # Run server
 run-server: build-server

@@ -1,0 +1,22 @@
+{{ define "content" }}
+<h2>Project: {{ .Project }}</h2>
+
+<table border="1">
+  <tr>
+    <th>Full Tag</th>
+    <th>System</th>
+    <th>Description</th>
+    <th>UDC</th>
+  </tr>
+  {{ range .Tags }}
+  <tr>
+    <td>{{ .FullTag }}</td>
+    <td>{{ .SystemName }}</td>
+    <td>{{ .Description }}</td>
+    <td>{{ .UDCCode }}</td>
+  </tr>
+  {{ end }}
+</table>
+
+<p><a href="/export/{{ .Project }}">Export Project</a></p>
+{{ end }}
