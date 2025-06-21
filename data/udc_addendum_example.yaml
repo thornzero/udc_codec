@@ -1,0 +1,36 @@
+# Example UDC Addendum File
+# This file contains local additions to the UDC classification
+# Files should be named: udc_addendum_*.yaml
+# IMPORTANT: Addendums cannot override existing UDC codes
+
+# Example: Adding a new local classification (valid)
+- code: "621.3.001"
+  title: "Local Electronics Classification"
+  children:
+    - code: "621.3.001.1"
+      title: "Custom Circuit Design"
+    - code: "621.3.001.2"
+      title: "Specialized Components"
+
+# Example: Adding completely new local classifications (valid)
+- code: "999.1"
+  title: "Local Company Classifications"
+  children:
+    - code: "999.1.1"
+      title: "Proprietary Equipment"
+    - code: "999.1.2"
+      title: "Custom Processes"
+
+# Example: Adding children to existing classifications (valid)
+# Note: This creates new codes under existing ones
+- code: "621.3.LOCAL"
+  title: "Local Electrical Engineering Topics"
+  children:
+    - code: "621.3.LOCAL.1"
+      title: "Company-Specific Electrical Systems"
+    - code: "621.3.LOCAL.2"
+      title: "Custom Electrical Components"
+
+# INVALID EXAMPLES (would cause errors):
+# - code: "004"  # This would overlap with existing UDC code
+# - code: "621.3"  # This would overlap with existing UDC code 

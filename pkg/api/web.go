@@ -2,10 +2,10 @@ package api
 
 import (
 	"log"
-	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
+	"github.com/thornzero/udc_codec/pkg/config"
 )
 
 func tagsPage(c *fiber.Ctx) error {
@@ -26,10 +26,7 @@ func StartWebPortal() {
 	app.Post("/upload-bom", handleUpload)
 	app.Get("/tags", tagsPage)
 
-	port := os.Getenv("SERVER_PORT")
-	if port == "" {
-		port = "8080"
-	}
+	port := config.Load().Port
 
 	log.Printf("Web portal running on port %s", port)
 	log.Fatal(app.Listen(":" + port))

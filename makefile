@@ -29,8 +29,24 @@ run-cli: build-cli ## Run the CLI tool (udccli)
 	./bin/udccli
 
 # Run tests
-test: ## Run all Go tests in the pkg directory
+test: build-cli ## Run all Go tests in the pkg directory
 	go test ./pkg/...
+
+test-verbose: build-cli ## Run all Go tests with verbose output
+	go test -v ./pkg/...
+
+test-udc: build-cli	## Run tests specifically for the UDC module
+	go test -v ./pkg/udc/...
+
+test-coverage: build-cli ## Run tests with coverage reporting
+	go test -cover ./pkg/...
+
+test-coverage-html: build-cli ## Run tests with HTML coverage report
+	go test -coverprofile=coverage.out ./pkg/...
+	go tool cover -html=coverage.out -o coverage.html
+	@echo "Coverage report generated: coverage.html"
+
+test-all: test-verbose test-coverage ## Run all tests with verbose output and coverage
 
 # Tidy dependencies
 tidy: ## Clean up and verify Go module dependencies

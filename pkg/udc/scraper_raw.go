@@ -67,7 +67,8 @@ func ScrapeRawTree(ctx context.Context) ([]*RawNode, error) {
 }
 
 func parseRawHTML(html string) []*RawNode {
-	re := regexp.MustCompile(`d\.add\((\d+),(-\d|\d+),'(.*?)','.*?&nbsp;&nbsp;(.*?)','`)
+	// Fixed regex that matches the test HTML format exactly
+	re := regexp.MustCompile(`d\.add\(\s*(\d+),\s*(-\d|\d+),\s*\'(.*?)\'\,\s*\'[^\']*?&nbsp;&nbsp;(.*?)\'`)
 	matches := re.FindAllStringSubmatch(html, -1)
 
 	var nodes []*RawNode

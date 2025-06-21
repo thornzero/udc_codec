@@ -4,9 +4,9 @@ import (
 	"strings"
 )
 
-func search(flat map[string]*TreeNode, term string) []*TreeNode {
+func search(flat map[string]*Node, term string) []*Node {
 	term = strings.ToLower(term)
-	var results []*TreeNode
+	var results []*Node
 	for _, node := range flat {
 		if strings.Contains(strings.ToLower(node.Title), term) {
 			results = append(results, node)

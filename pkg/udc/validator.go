@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func validateComposite(code string, flat map[string]*TreeNode) error {
+func validateComposite(code string, flat map[string]*Node) error {
 	parts, err := parseComposite(code)
 	if err != nil {
 		return err

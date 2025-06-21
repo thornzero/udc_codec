@@ -4,17 +4,18 @@ import (
 	"fmt"
 
 	"github.com/thornzero/udc_codec/pkg/aggregator"
+	"github.com/thornzero/udc_codec/pkg/config"
 	"github.com/thornzero/udc_codec/pkg/db"
 	"github.com/thornzero/udc_codec/pkg/pipeline"
 	"github.com/thornzero/udc_codec/pkg/udc"
 )
 
 func runFullPipeline(projectName, bomFile string) error {
-	udcCodec, err := udc.LoadCodec("data/udc_full.yaml")
+	udcCodec, err := udc.LoadCodec(fmt.Sprintf("%s/udc_full.yaml", config.Load().DataDir))
 	if err != nil {
 		return err
 	}
-	agg, err := aggregator.LoadAggregatedDatabase("data/aggregated_master.yaml")
+	agg, err := aggregator.LoadAggregatedDatabase(fmt.Sprintf("%s/aggregated_master.yaml", config.Load().DataDir))
 	if err != nil {
 		return err
 	}
@@ -44,13 +45,13 @@ func runFullPipeline(projectName, bomFile string) error {
 		})
 	}
 
-	outputFile := fmt.Sprintf("data/%s_taglist.yaml", projectName)
+	outputFile := fmt.Sprintf("%s/%s_taglist.yaml", config.Load().DataDir, projectName)
 	if err := pipeline.ExportTagList(exportRecords, outputFile); err != nil {
 		return err
 	}
 
 	// Insert into DB registry
-	store, err := db.OpenDB("tags.db")
+	store, err := db.OpenDB(config.Load().DBPath)
 	if err != nil {
 		return err
 	}

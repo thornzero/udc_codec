@@ -6,6 +6,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 
+	"github.com/thornzero/udc_codec/pkg/config"
 	"github.com/thornzero/udc_codec/pkg/db"
 	"github.com/thornzero/udc_codec/pkg/pipeline"
 )
@@ -24,7 +25,7 @@ func handleUpload(c *fiber.Ctx) error {
 		return c.Status(400).SendString("File upload error")
 	}
 
-	savePath := fmt.Sprintf("data/%s", file.Filename)
+	savePath := fmt.Sprintf("%s/%s", config.Load().DataDir, file.Filename)
 	if err := c.SaveFile(file, savePath); err != nil {
 		return c.Status(500).SendString("File save error")
 	}
@@ -58,7 +59,7 @@ func uploadBOM(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Missing BOM file")
 	}
 
-	if err := c.SaveFile(file, fmt.Sprintf("data/%s", file.Filename)); err != nil {
+	if err := c.SaveFile(file, fmt.Sprintf("%s/%s", config.Load().DataDir, file.Filename)); err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to save BOM")
 	}
 
@@ -77,7 +78,7 @@ func getTag(c *fiber.Ctx) error {
 }
 
 func projectsPage(c *fiber.Ctx) error {
-	store, err := db.OpenDB("tags.db")
+	store, err := db.OpenDB(config.Load().DBPath)
 	if err != nil {
 		return c.Status(500).SendString("DB error")
 	}
@@ -97,7 +98,7 @@ func projectsPage(c *fiber.Ctx) error {
 
 func projectDetailPage(c *fiber.Ctx) error {
 	project := c.Params("project")
-	tagFile := fmt.Sprintf("data/%s_taglist.yaml", project)
+	tagFile := fmt.Sprintf("%s/%s_taglist.yaml", config.Load().DataDir, project)
 
 	entries, err := pipeline.LoadExportedTags(tagFile)
 	if err != nil {
@@ -112,7 +113,7 @@ func projectDetailPage(c *fiber.Ctx) error {
 
 func exportProjectPage(c *fiber.Ctx) error {
 	project := c.Params("project")
-	tagFile := fmt.Sprintf("data/%s_taglist.yaml", project)
+	tagFile := fmt.Sprintf("%s/%s_taglist.yaml", config.Load().DataDir, project)
 
 	entries, err := pipeline.LoadExportedTags(tagFile)
 	if err != nil {
